@@ -26,13 +26,13 @@ cp evaluation/.env.example evaluation/.env
 모델을 직접 로드해 다섯 개 prediction JSONL을 만들고, 자동 평가와 인간 평가 HTML을 생성합니다.
 
 ```bash
-uv run python -m evaluation.run_pipeline \
+uv run --package tripfit-model python -m evaluation.run_pipeline \
   --config evaluation/config.json \
   --out evaluation/runs/2026-09-29
 ```
 
 ```bash
-uv run python -m evaluation.run_pipeline \
+uv run --package tripfit-model python -m evaluation.run_pipeline \
   --config evaluation/config.json \
   --out evaluation/runs/2026-09-29 \
   --env-file /path/to/team-evaluation.env
@@ -55,7 +55,7 @@ evaluation/runs/2026-09-29/
 같은 모델을 여러 test로 평가하려면 `--gold`로 config의 `gold`를 덮어씁니다. 결과 폴더는 test마다 나눕니다.
 
 ```bash
-uv run python -m evaluation.run_pipeline \
+uv run --package tripfit-model python -m evaluation.run_pipeline \
   --config evaluation/config.json \
   --gold datasets/v2/test_real.jsonl \
   --out evaluation/runs/2026-09-29-real \
@@ -67,7 +67,7 @@ uv run python -m evaluation.run_pipeline \
 GPT Judge를 실행하지 않고 자동 평가와 인간 평가만 만들려면 다음처럼 실행합니다.
 
 ```bash
-uv run python -m evaluation.run_pipeline \
+uv run --package tripfit-model python -m evaluation.run_pipeline \
   --config evaluation/config.json \
   --out evaluation/runs/2026-09-29 \
   --skip-judge
@@ -76,7 +76,7 @@ uv run python -m evaluation.run_pipeline \
 이미 생성된 prediction JSONL을 재사용하려면 다음 옵션을 사용합니다.
 
 ```bash
-uv run python -m evaluation.run_pipeline \
+uv run --package tripfit-model python -m evaluation.run_pipeline \
   --config evaluation/config.json \
   --out evaluation/runs/2026-09-29 \
   --skip-inference
@@ -89,7 +89,7 @@ Judge는 리뷰 1건과 모델 1개마다 API를 한 번씩 부릅니다. 리뷰
 1. 호출 없이 횟수만 확인합니다.
 
 ```bash
-uv run python -m evaluation.run_pipeline \
+uv run --package tripfit-model python -m evaluation.run_pipeline \
   --config evaluation/config.json \
   --out evaluation/runs/calibration \
   --skip-inference --judge-limit 20 --judge-dry-run
@@ -98,7 +98,7 @@ uv run python -m evaluation.run_pipeline \
 2. 소량(20건)으로 응답 형식과 점수를 확인합니다. `--judge-limit`은 파일 앞부분이 아니라 고정 seed로 카테고리가 섞이게 뽑습니다.
 
 ```bash
-uv run python -m evaluation.run_pipeline \
+uv run --package tripfit-model python -m evaluation.run_pipeline \
   --config evaluation/config.json \
   --out evaluation/runs/calibration \
   --skip-inference --judge-limit 20
@@ -129,7 +129,7 @@ uv run python -m evaluation.run_pipeline \
 이미 만든 예측 파일도 GPU 없이 다시 정리할 수 있습니다.
 
 ```bash
-uv run python -m travel_planner.model_cjm.postprocess \
+uv run --package tripfit-model python -m travel_planner.model_cjm.postprocess \
   --input evaluation/runs/qwen-real/predictions/qwen3_4b_qlora_v2.jsonl \
   --output evaluation/runs/qwen-real/predictions_postprocessed.jsonl
 ```

@@ -112,7 +112,7 @@ attraction
 | [`hinoonyaso/exaone-tripfit`](https://ollama.com/hinoonyaso/exaone-tripfit) | 🦙 Ollama | EXAONE-3.5-2.4B-Instruct | 병합 + GGUF q4_k_m (약 1.5GB) | `ollama run hinoonyaso/exaone-tripfit:qlora-v2` |
 
 > [!IMPORTANT]
-> **후처리는 모델 밖에 있습니다.** Ollama 모델에는 후처리가 들어 있지 않으므로 호출하는 쪽에서 `postprocess`(HF 저장소의 `inference/tripfit_postprocess.py` 또는 [`postprocess.py`](src/travel_planner/model_cjm/postprocess.py))를 적용해야 합니다. 쓰지 않으면 F1이 0.52 수준입니다.
+> **후처리는 모델 밖에 있습니다.** Ollama 모델에는 후처리가 들어 있지 않으므로 호출하는 쪽에서 `postprocess`(HF 저장소의 `inference/tripfit_postprocess.py` 또는 [`postprocess.py`](model/src/travel_planner/model_cjm/postprocess.py))를 적용해야 합니다. 쓰지 않으면 F1이 0.52 수준입니다.
 
 > [!CAUTION]
 > 학습 데이터는 전부 **합성 리뷰**이고, 평가 리뷰의 약 78%가 기계번역문입니다. Qwen3 GGUF(양자화) 모델의 재평가 수치는 아직 없습니다. 리뷰 한 건을 그대로 보여주는 용도보다 **장소별 집계**에 적합합니다.
@@ -245,7 +245,8 @@ travel-planner
 │   ├── models/         SQLAlchemy 모델
 │   └── clients/        Ollama 클라이언트
 ├── frontend/           Next.js 프론트엔드 (app/, components/, lib/)
-├── src/travel_planner/model_cjm/   학습·추론·후처리 (train, infer, postprocess, prompt)
+├── model/              모델 의존성(torch 등)을 분리한 uv 프로젝트
+│   └── src/travel_planner/model_cjm/   학습·추론·후처리 (train, infer, postprocess, prompt)
 ├── datas/common/       데이터 도구 (스키마, 수집, 합성, 라벨, 검사, 검수, 분할)
 ├── datasets/v2/        학습·검증·테스트 데이터셋과 manifest
 ├── evaluation/         평가 파이프라인 (자동 지표, Judge, 인간 평가, 지연 측정)
@@ -274,8 +275,11 @@ API_SERVER_URL=http://127.0.0.1:8000 npm run dev
 ```
 
 ```bash
+# 모델 의존성(torch 등)은 별도 프로젝트라 필요할 때만 설치합니다
+uv sync --package tripfit-model --inexact
+
 # 같은 Gold Test로 모델 비교
-uv run python -m evaluation.run_pipeline --config evaluation/config.json --out evaluation/runs/<실행 이름>
+uv run --package tripfit-model python -m evaluation.run_pipeline --config evaluation/config.json --out evaluation/runs/<실행 이름>
 ```
 
 모델 로드·학습·어댑터 적용은 각각 별도 단계입니다. 상세 절차는 [`evaluation/README.md`](evaluation/README.md), [`deploy/ollama/README.md`](deploy/ollama/README.md), [`datas/common/README.md`](datas/common/README.md)를 참고하세요.

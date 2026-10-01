@@ -14,7 +14,7 @@ Ollama에는 adapter만 올릴 수 없어서 **Base에 합친 전체 모델을 G
 
 **1. 병합** — adapter를 bf16 Base에 합쳐 `deploy/ollama/merged/`에 저장 (Base가 없으면 약 8GB를 받는다)
 ```bash
-uv run python deploy/ollama/merge_adapter.py
+uv run --package tripfit-model python deploy/ollama/merge_adapter.py
 ```
 
 **2. GGUF 변환** (llama.cpp의 변환 스크립트)
@@ -44,7 +44,7 @@ ollama run sunub/qwen3-tripfit:qlora-v3
 
 **6. 재평가 (올리기 전에 반드시)** — 병합과 양자화를 거쳤으므로 성능이 유지되는지 실제 리뷰 50건으로 확인한다
 ```bash
-uv run python -m evaluation.run_pipeline --config evaluation/config.ollama.example.json --out evaluation/runs/ollama --skip-judge
+uv run --package tripfit-model python -m evaluation.run_pipeline --config evaluation/config.ollama.example.json --out evaluation/runs/ollama --skip-judge
 ```
 후처리를 적용한 Aspect F1이 0.62 안팎이어야 한다. 크게 낮으면 더 큰 양자화(Q5_K_M, Q8_0)로 다시 만든다.
 이 설정에는 팀원 모델(`hinoonyaso/exaone-tripfit:qlora-v2`)도 들어 있다. 그 모델을 재려면 먼저 `ollama pull`이 필요하다(1.5GB).
