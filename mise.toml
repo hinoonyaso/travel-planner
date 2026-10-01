@@ -1,0 +1,45 @@
+[tools]
+node = "24"
+python = "3.12"
+uv = "latest"
+
+[env]
+_.file = { path = ".env", redact = true }
+
+# -- backend (루트 기준 import 이므로 dir 을 지정하지 않는다)
+[tasks."backend:install"]
+run = "uv sync --inexact"
+
+[tasks."backend:dev"]
+description = "Run backend in dev mode"
+depends = ["backend:install"]
+run = "uv run uvicorn backend.main:app --reload --port 8000"
+
+# -- frontend
+[tasks."frontend:install"]
+dir = "frontend"
+run = "npm install"
+
+[tasks."frontend:dev"]
+description = "Run frontend in dev mode"
+dir = "frontend"
+depends = ["frontend:install"]
+run = "npm run dev"
+
+[tasks."frontend:build"]
+dir = "frontend"
+depends = ["frontend:install"]
+run = "npm run build"
+
+# -- model (torch 등 대용량 설치라 install/dev 에는 넣지 않는다)
+[tasks."model:install"]
+description = "Install model deps (torch etc.; large download)"
+run = "uv sync --package tripfit-model --inexact"
+
+# -- all
+[tasks.install]
+depends = ["backend:install", "frontend:install"]
+
+[tasks.dev]
+description = "Run both backend and frontend in dev mode"
+depends = ["backend:dev", "frontend:dev"]
