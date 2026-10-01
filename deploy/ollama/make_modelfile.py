@@ -12,7 +12,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT / "src"))
+sys.path.insert(0, str(ROOT / "model" / "src"))
 
 from travel_planner.model_cjm.prompt import build_prompt, build_system_message  # noqa: E402
 

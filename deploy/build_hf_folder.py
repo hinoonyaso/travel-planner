@@ -250,7 +250,7 @@ bitsandbytes>=0.50.2
 
 def standalone_postprocess() -> str:
     """저장소의 postprocess.py에서 저장소 안 import 두 개를 값으로 바꿔 혼자 돌아가는 파일을 만든다."""
-    source = (ROOT / "src/travel_planner/model_cjm/postprocess.py").read_text(encoding="utf-8")
+    source = (ROOT / "model/src/travel_planner/model_cjm/postprocess.py").read_text(encoding="utf-8")
     aspects = {name: sorted(values) for name, values in ASPECTS.items()}
     schema = (
         "# 저장소의 datas/common/schema.py에서 생성한 허용값\n"
@@ -288,7 +288,7 @@ def main() -> None:
 
     (TARGET / "README.md").write_text(MODEL_CARD, encoding="utf-8")
     (TARGET / "inference/tripfit_postprocess.py").write_text(standalone_postprocess(), encoding="utf-8")
-    shutil.copy2(ROOT / "src/travel_planner/model_cjm/prompt.py", TARGET / "inference/tripfit_prompt.py")
+    shutil.copy2(ROOT / "model/src/travel_planner/model_cjm/prompt.py", TARGET / "inference/tripfit_prompt.py")
     (TARGET / "inference/example.py").write_text(EXAMPLE, encoding="utf-8")
     (TARGET / "inference/requirements.txt").write_text(REQUIREMENTS, encoding="utf-8")
     (ROOT / "deploy/CHECKLIST.md").write_text(CHECKLIST.replace("{name}", NAME), encoding="utf-8")
