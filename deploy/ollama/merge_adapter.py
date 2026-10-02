@@ -1,6 +1,6 @@
 """LoRA adapter를 Base 모델에 합쳐 전체 모델(safetensors)로 저장한다. Ollama용 GGUF 변환의 첫 단계다.
 
-  uv run python deploy/ollama/merge_adapter.py
+  uv run --package tripfit-model python deploy/ollama/merge_adapter.py
 
 Base는 4비트가 아니라 bf16으로 불러 합친다. 이 adapter는 4비트 Base 위에서 학습했으므로 합친 모델의 출력이
 평가 때와 조금 다를 수 있다. 합친 뒤 GGUF로 만든 모델을 반드시 다시 평가한다 (README 참고).

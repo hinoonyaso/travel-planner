@@ -1,0 +1,23 @@
+[project]
+name = "tripfit-model"
+version = "0.1.0"
+description = "TripFit 리뷰 추출 모델의 학습·추론·후처리"
+requires-python = ">=3.12"
+dependencies = [
+    "bitsandbytes>=0.50.2 ; sys_platform == 'linux'",
+    "datasets>=5.0.1",
+    "peft>=0.21.2",
+    "python-dotenv>=1.2.3",
+    "requests>=2.34.2",
+    "torch>=2.14.0",
+    "transformers>=5.18.0",
+    "trl>=1.14.1",
+    "wandb>=0.30.0",
+]
+
+[build-system]
+requires = ["uv_build>=0.12.3,<0.13.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "travel_planner"

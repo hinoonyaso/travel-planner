@@ -15,18 +15,26 @@ dependencies = [
     "pydantic-settings>=2.15.0",
     "pyjwt>=2.10",
     "sqlalchemy[asyncio]>=2.1.1",
-    "torch>=2.14.0",
     "uvicorn>=0.54.0",
 ]
-
-[project.scripts]
-travel-planner = "travel_planner:main"
-
-[build-system]
-requires = ["uv_build>=0.12.3,<0.13.0"]
-build-backend = "uv_build"
 
 [dependency-groups]
 dev = [
     "aiosqlite>=0.22.1",
 ]
+# datas/ 수집·가공 도구용. 가벼워서 기본으로 함께 설치한다.
+data = [
+    "openpyxl>=3.1.5",
+    "python-dotenv>=1.2.3",
+    "requests>=2.34.2",
+]
+
+[tool.uv]
+# backend 는 루트 기준 import(backend.*) 라서 패키지로 빌드하지 않는다.
+package = false
+default-groups = ["dev", "data"]
+
+# 모델 학습·추론 의존성(torch 등)은 model/ 에 분리한다.
+# 필요할 때만: uv sync --package tripfit-model --inexact
+[tool.uv.workspace]
+members = ["model"]
