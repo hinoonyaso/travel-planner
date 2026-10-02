@@ -169,7 +169,7 @@ fit(장소)        = 50 + Σ w × (goodness − 50) / Σ w        (장소 리뷰
 | --- | --- | --- |
 | **Frontend** | ![Next.js](https://img.shields.io/badge/Next.js_15-000000?style=flat-square&logo=nextdotjs&logoColor=white) ![React](https://img.shields.io/badge/React_19-61DAFB?style=flat-square&logo=react&logoColor=black) ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) | App Router, `/api/*`를 FastAPI로 rewrite |
 | **Backend** | ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white) ![Python](https://img.shields.io/badge/Python_3.12-3776AB?style=flat-square&logo=python&logoColor=white) ![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-D71F00?style=flat-square&logo=sqlalchemy&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white) | asyncpg, argon2 비밀번호 해시 |
-| **DB** | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white) | 장소·리뷰·`review_annotations` ([스키마](docs/db_schema.sql)) |
+| **DB** | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white) | 장소·리뷰·`review_annotations` ([스키마](docs/db_schema.sql) · [ERD](docs/어디갈건호%20여행%20리뷰%20데이터베이스%20ERD.png)) |
 | **Model** | ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white) ![Hugging Face](https://img.shields.io/badge/PEFT_/_Transformers-FFD21E?style=flat-square&logo=huggingface&logoColor=black) ![Qwen](https://img.shields.io/badge/Qwen3--4B-6A4CFF?style=flat-square) ![EXAONE](https://img.shields.io/badge/EXAONE--3.5--2.4B-A50034?style=flat-square) | QLoRA (4-bit NF4, r=16, α=32) |
 | **Serving** | ![Ollama](https://img.shields.io/badge/Ollama-000000?style=flat-square&logo=ollama&logoColor=white) | GGUF Q4_K_M |
 | **Data** | ![Gemma](https://img.shields.io/badge/gemma4:e4b-4285F4?style=flat-square&logo=google&logoColor=white) | 합성 리뷰·Silver 라벨링 (Teacher LLM), TourAPI·부산시 API 장소 |
@@ -251,7 +251,7 @@ travel-planner
 ├── datasets/v2/        학습·검증·테스트 데이터셋과 manifest (저장소 미포함, 로컬 전용)
 ├── evaluation/         평가 파이프라인 (자동 지표, Judge, 인간 평가, 지연 측정)
 ├── deploy/             HF 어댑터 폴더, Ollama 병합·GGUF·Modelfile
-├── docs/               라벨링 가이드, DB 스키마, API 명세서, 평가 보고서, 발표 자료
+├── docs/               라벨링 가이드, DB 스키마·ERD, API 명세서, 평가 보고서, 발표 자료
 └── tests/              추천·프론트 계약 테스트
 ```
 
