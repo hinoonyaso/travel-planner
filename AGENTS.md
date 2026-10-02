@@ -7,8 +7,7 @@ Python >= 3.12, managed with `uv` from the repository root; package code lives i
 `model/src/travel_planner/`. Loading a model, training, and applying an adapter are
 separate steps that each need an explicit request.
 
-`README.md` defines the current scope. `docs/init-plan.md` describes an earlier
-itinerary-planner design; where the two disagree, follow `README.md`.
+`README.md` defines the current scope.
 
 <!--
 This file is loaded into every conversation, so each line has to earn its tokens.
