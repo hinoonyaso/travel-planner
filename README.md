@@ -12,7 +12,7 @@
 [🦙 Ollama · Qwen3](https://ollama.com/bsc5672/qwen3-tripfit) ·
 [🦙 Ollama · EXAONE](https://ollama.com/hinoonyaso/exaone-tripfit) ·
 [📊 평가 보고서](docs/evaluation/2026-09-29-base-vs-qlora.md) ·
-[🔌 API 명세서](frontend/어디갈건호%20API%20명세서.md)
+[🔌 API 명세서](docs/어디갈건호%20API%20명세서.md)
 
 </div>
 
@@ -248,10 +248,10 @@ travel-planner
 ├── model/              모델 의존성(torch 등)을 분리한 uv 프로젝트
 │   └── src/travel_planner/model_cjm/   학습·추론·후처리 (train, infer, postprocess, prompt)
 ├── datas/common/       데이터 도구 (스키마, 수집, 합성, 라벨, 검사, 검수, 분할)
-├── datasets/v2/        학습·검증·테스트 데이터셋과 manifest
+├── datasets/v2/        학습·검증·테스트 데이터셋과 manifest (저장소 미포함, 로컬 전용)
 ├── evaluation/         평가 파이프라인 (자동 지표, Judge, 인간 평가, 지연 측정)
 ├── deploy/             HF 어댑터 폴더, Ollama 병합·GGUF·Modelfile
-├── docs/               라벨링 가이드, DB 스키마, 평가 보고서
+├── docs/               라벨링 가이드, DB 스키마, API 명세서, 평가 보고서, 발표 자료
 └── tests/              추천·프론트 계약 테스트
 ```
 
